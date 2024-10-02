@@ -12,14 +12,6 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
-    public Product saveProduct(Product product) {
-        return productRepository.save(product);
-    }
-
-    public List<Product> saveProduct(List<Product> products) {
-        return productRepository.saveAll(products);
-    }
-
     public List<Product> getProducts() {
         return productRepository.findAll();
     }
@@ -32,9 +24,12 @@ public class ProductService {
         return productRepository.findByName(name);
     }
 
-    public String deleteProduct(int id) {
-        productRepository.deleteById(id);
-        return "Product removed successfully - ID: " + id;
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
+
+    public List<Product> saveProducts(List<Product> products) {
+        return productRepository.saveAll(products);
     }
 
     public Product updateProduct(Product product) {
@@ -43,5 +38,10 @@ public class ProductService {
         existingProduct.setQuantity(product.getQuantity());
         existingProduct.setPrice(product.getPrice());
         return productRepository.save(existingProduct);
+    }
+
+    public String deleteProduct(int id) {
+        productRepository.deleteById(id);
+        return "Product removed successfully - ID: " + id;
     }
 }
